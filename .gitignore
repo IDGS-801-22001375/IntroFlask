@@ -3,9 +3,3 @@ venv/
 
 # Ignore the Python cache
 __pycache__/
-
-# Ignore the Flask application
-app.py
-
-# Ignore the requirements file
-requirements.txt
