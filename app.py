@@ -1,10 +1,38 @@
-from flask import Flask
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "Hello World!"
+    titulo = "Flask IDGS-801"
+    lista = ["Juan", "Mario", "Pedro", "Dario"]
+    return render_template("index.html", titulo = titulo, lista = lista)
+
+@app.route("/operasBas", methods=["GET", "POST"])
+def operasBas():
+    n1=0
+    n2=0
+    rest=0
+    if request.method == "POST":
+        n1 = request.form.get("n1")
+        n2 = request.form.get("n2")
+        rest = float(n1) + float(n2)
+    return render_template("operasBas.html", n1=n1, n2=n2, rest=rest)
+
+@app.route("/resultado", methods=["GET", "POST"])
+def resultado():
+    n1 = request.form.get("n1")
+    n2 = request.form.get("n2")
+    tem = float(n1) + float(n2)
+    return f"La suma es: {tem}"
+
+@app.route("/alumnos")
+def alumnos():
+    return render_template("alumnos.html")
+
+@app.route("/usuarios")
+def usuarios():
+    return render_template("usuarios.html")
 
 @app.route("/hola")
 def hola():
