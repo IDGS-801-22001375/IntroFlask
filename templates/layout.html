@@ -40,6 +40,15 @@
         </div>
     </nav>
     <div class="container mt-5 pt-5">
+        {% with messages=get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
         {% block content %}
         {% endblock %}
     </div>
