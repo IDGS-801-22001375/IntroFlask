@@ -20,4 +20,4 @@ class UserForm(Form):
     ])
     correo=EmailField('Correo',[
         validators.Email(message="Ingresa un correo valido")
-    ])    
+    ])

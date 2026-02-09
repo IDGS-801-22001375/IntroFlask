@@ -2,11 +2,26 @@ from flask import Flask, render_template, request
 from flask import flash
 from flask_wtf.csrf import CSRFProtect
 import forms
+import math
 
 app = Flask(__name__)
 
 app.secret_key = "6hK2p4;_L#(*CCckH))*26uVm6N(H+"
 csrf = CSRFProtect()
+
+
+## RUTA DISTANCIA ENTRE DOS PUNTOS
+@app.route("/distancia", methods=["GET", "POST"])
+def distancia():
+    distancia = 0
+    if request.method == "POST":
+        x1 = float(request.form.get("x1"))
+        y1 = float(request.form.get("y1"))
+        x2 = float(request.form.get("x2"))
+        y2 = float(request.form.get("y2"))
+        distancia = round(math.sqrt((x2 - x1)**2 + (y2 - y1)**2))
+
+    return render_template("distancia_puntos/distancia_puntos.html", distancia=distancia)
 
 @app.route("/")
 def index():

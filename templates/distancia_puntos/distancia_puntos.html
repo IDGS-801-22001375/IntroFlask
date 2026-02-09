@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macros_distancia %}
+
+{% block content %}
+<h1 class="text-center mt-2 mb-5 fs-9">Distancia entre dos puntos</h1>
+<form action="/distancia" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mb-3">
+            <h3>Punto 1</h3>
+            {{ macros_distancia.distancia("x1", "x1") }}
+            {{ macros_distancia.distancia("y1", "y1") }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <h3>Punto 2</h3>
+            {{ macros_distancia.distancia("x2", "x2") }}
+            {{ macros_distancia.distancia("y2", "y2") }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Calcular la distancia</button>
+</form>
+<h1 class="mt-5 text-center fs-3">La distancia entre los puntos es: {{ distancia }}</h1>
+{% endblock %}
