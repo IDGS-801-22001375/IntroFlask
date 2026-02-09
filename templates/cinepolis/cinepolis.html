@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macrosnuevo %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="cine-card">
+
+                <h1 class="text-center cine-title mb-3">Cinépolis</h1>
+                <p class="text-center text-muted">Precio del boleto: <strong>$12,000</strong></p>
+
+                <div class="alert alert-info small">
+                    <ul class="mb-0">
+                        <li>15% de descuento si compras más de 5 boletos</li>
+                        <li>10% de descuento si compras 3, 4 o 5 boletos</li>
+                        <li>Sin descuento para 1 o 2 boletos</li>
+                        <li>Tarjeta Cinéco: 10% adicional</li>
+                    </ul>
+                </div>
+
+                <form action="/ticket_cinepolis" method="post" novalidate>
+                    {{ form.csrf_token }}
+                    <input type="hidden" name="csrf_token" value="{{csrf_token()}}"></input>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="section-title">Entradas</h5>
+                            <div class="mb-3">
+                                {{ macrosnuevo.campoNuevo(form.nombre, class="form-control") }}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ macrosnuevo.campoNuevo(form.cantidad_compradores, class="form-control") }}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ macrosnuevo.campoNuevo(form.es_con_tarjeta_cineco, class="form-control") }}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ macrosnuevo.campoNuevo(form.cantidad_boletos, class="form-control") }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h5 class="section-title">Salidas</h5>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Valor a pagar</label>
+                                <input type="text" class="form-control text-center fw-bold"
+                                    value="{{ precio_ticket_cinepolis }}" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <h5 class="section-title">Acciones</h5>
+                        <button type="submit" class="btn btn-success px-4 me-2">Procesar</button>
+                        <a href="/" class="btn btn-danger px-4">Salir</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -23,6 +23,39 @@ def distancia():
 
     return render_template("distancia_puntos/distancia_puntos.html", distancia=distancia)
 
+## RUTA TICKET CINEPOLIS
+@app.route("/ticket_cinepolis", methods=["GET", "POST"])
+def ticket_cinepolis():
+    form = forms.TicketCinepolis(request.form)
+    ticket_cinepolis = ""
+    if request.method == "POST" and form.validate():
+
+        cantidad_boletos = form.cantidad_boletos.data
+        cantidad_compradores = form.cantidad_compradores.data
+        usa_tarjeta = form.es_con_tarjeta_cineco.data
+
+        if cantidad_boletos > cantidad_compradores * 7:
+            ticket_cinepolis = "No se pueden comprar más de 7 boletos por persona."
+        else:
+            precio_boleto = 12
+            subtotal = cantidad_boletos * precio_boleto
+
+            if cantidad_boletos > 5:
+                descuento = 0.15
+            elif 3 <= cantidad_boletos <= 5:
+                descuento = 0.10
+            else:
+                descuento = 0
+
+            total = subtotal * (1 - descuento)
+
+            if usa_tarjeta == 'si':
+                total *= 0.90
+
+            ticket_cinepolis = f"$ {total:.2f}"
+
+    return render_template("cinepolis/cinepolis.html", form=form, precio_ticket_cinepolis=ticket_cinepolis)
+
 @app.route("/")
 def index():
     titulo = "Flask IDGS-801"

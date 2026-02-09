@@ -1,0 +1,24 @@
+body {
+    background: linear-gradient(135deg, #0d47a1, #1976d2);
+    min-height: 100vh;
+}
+
+.cine-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.cine-title {
+    color: #0d47a1;
+    font-weight: bold;
+}
+
+.section-title {
+    font-weight: bold;
+    color: #1976d2;
+    border-bottom: 2px solid #1976d2;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+}
